@@ -13,4 +13,6 @@ NodeJS Embrace the pain
 
 * 	
 * Curl
+
+* node commandline
 * 
