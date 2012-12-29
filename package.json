@@ -1,0 +1,22 @@
+{
+  "name": "Presentation_NodeJS",
+  "version": "0.0.0",
+  "description": "Presentation on NodeJS",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "should": "~1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaneholder/Presentation_NodeJS.git"
+  },
+  "author": "Shane Holder",
+  "license": "BSD"
+}

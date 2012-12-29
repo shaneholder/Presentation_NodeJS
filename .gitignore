@@ -165,3 +165,4 @@ pip-log.txt
 # NodeJs
 node_modules/
 secret.js
+secret.json

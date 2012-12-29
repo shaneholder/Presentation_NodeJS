@@ -1,7 +1,6 @@
 NodeJS Embrace the pain
 =======================
 
-
 * Amazon Glacier
 	* Console
 	* Create vault
@@ -15,4 +14,15 @@ NodeJS Embrace the pain
 * Curl
 
 * node commandline
+
+* NPM
+* npm init
+* package.json
 * 
+* Testing
+* Mocha
+* Should
+* Fix Mocha for windows
+* http://stackoverflow.com/questions/10258248/no-such-module-error-when-trying-to-get-mocha-to-watch-my-project
+
+* Module
