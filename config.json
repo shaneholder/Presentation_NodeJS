@@ -1,4 +1,4 @@
 {
-	"service": "glacier",
-	"region": "us-east-1"
+  "service": "glacier",
+  "region": "us-east-1"
 }

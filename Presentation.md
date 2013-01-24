@@ -18,7 +18,11 @@ NodeJS Embrace the pain
 * NPM
 * npm init
 * package.json
-* 
+* Versioning
+* checkin node_modules?
+* npm shrinkwrap
+
+
 * Testing
 * Mocha
 * Should
@@ -26,3 +30,7 @@ NodeJS Embrace the pain
 * http://stackoverflow.com/questions/10258248/no-such-module-error-when-trying-to-get-mocha-to-watch-my-project
 
 * Module
+* 
+* Mentions
+* TypeScript
+* CoffeeScript
