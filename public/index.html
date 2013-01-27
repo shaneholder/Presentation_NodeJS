@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US" class="ie ie6 lt-ie9">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US" class="ie ie7 lt-ie9">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US" class="ie ie8 lt-ie9">
+<![endif]-->
+<!--[if gte IE 9]>
+<html lang="en-US" class="ie ie9">
+<![endif]-->
+<!--[if !(IE)]><!-->
+<html lang="en-US" class="">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="author" content="shane.holder@pobox.com">
+
+	<meta property="og:title" content="Javascript learn to love it?">
+	<meta property="og:type" content="website">
+
+	<title>Flowtime.js</title>
+	<link rel="stylesheet" href="assets/css/reset.css">
+	<link rel="stylesheet" href="css/flowtime.css">
+	<link rel="stylesheet" href="css/themes/default.css">
+	<link rel="stylesheet" href="assets/css/prism.css">
+</head>
+<body class="">
+	
+	<div class="flowtime">
+		<div class="ft-section" data-id="section-1">
+			<div id="/section-1/page-1" class="ft-page" data-id="page-1" data-title="">
+				<div class="stack-center">
+					<div class="stacked-center"><a href="javascript:Flowtime.next();"><img src="assets/img/nodejs-dark.png"></a><p class="page-title">NodeJS <a href="https://twitter.com/sholder" target="_blank">@sholder</a></p></div>
+				</div>
+			</div>
+			<div id="/section-1/page-2" class="ft-page" data-id="page-2" data-audience='{"title": "Have you heard of NodeJS?"}'>
+				<h1>What is it?</h1>
+				<p>who has heard of <strong>NodeJS</strong>?</p>
+				<div id="container"></div>
+			</div>
+			<div id="/section-1/page-3" class="ft-page" data-id="page-3">
+				<h1><strong>NodeJS</strong> is...</h1>				
+				<ul >
+					<li class="ft-fragment shy revealed actual">
+						<p ><strong>Not</strong> no Javascript.
+							<img class="ft-fragment shy revealed" style="position:fixed; right:0; margin-right: 3em;" src="assets/img/sadpuppy.jpg"/>
+						</p>
+					</li>
+					<li class="ft-fragment">Server side</li>
+					<li class="ft-fragment"><strong>Asynchronous</strong> by default.</li>
+					<li class="ft-fragment"> DD</li>
+					<li class="ft-fragment">Fun!!</li>
+				</ul>				
+			</div>
+			<div id="/section-1/page-4" class="ft-page" data-id="page-4">
+				<h1>Server Side</h1>
+				<pre class="language-javascript">
+					<code class="language-javascript">
+var fs = require('fs');  //Module ...hang tight.
+fs.readFile("./test.txt", function (err, data){
+  if (err) {
+    console.log(err);
+    return;
+	}
+	console.log(data);
+});
+					</code>
+			</div>
+			<div id="section-1/page-5" class="ft-page" data-id="page-5">
+				<h1>Modules, modules, modules</h1>
+				<pre>
+					<code>
+var fs = require('fs'), // File System
+
+					</code>
+				</pre>				
+			</div>
+		</div>
+
+		<div class="ft-section" data-id="section-2">
+			<div id="/section-2/page-1" class="ft-page" data-id="page-1">
+				<h1>Thanks..</h1>
+			</div>
+			<div id="/section-2/page-2" class="ft-page" data-id="page-2">
+				<h1>Resources..</h1>
+				<dl>
+					<dt>NodeJS</dt>
+					<dd>http://nodejs.org/</dd>
+					<dt>Flowtime.js</dt>
+					<dd>http://flowtime-js.marcolago.com/</dd>
+					<dt>Controldeck.js</dt>
+					<dd>http://dfcb.github.com/controldeck.js/</dd>
+				</dl>
+			</div>
+		</div>
+
+	</div>
+	<script src="/js/jquery-1.8.3.min.js"></script>
+	<script src="js/brav1toolbox.js"></script>
+	<script src="js/flowtime.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="js/votechart.js"></script>
+	<script src="assets/js/prism.js"></script>
+	
+	<!-- controldeck.js -->
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/controldeck-flowtime.js"></script>
+	
+	<script>
+		// Configuration API test
+		Flowtime.showProgress(true);
+		// Flowtime.fragmentsOnSide(true);
+		// Flowtime.fragmentsOnBack(true);
+		// Flowtime.useHistory(false);
+		// Flowtime.slideInPx(true);
+		// Flowtime.sectionsSlideToTop(true);
+		// Flowtime.gridNavigation(false);
+		// Flowtime.useOverviewVariant(true);
+		Flowtime.parallaxInPx(true);
+		//
+		// event management
+		var cacheTitle = document.title.replace("Flowtime.js | ", "");
+		Flowtime.addEventListener("flowtimenavigation", onNavigation, false);
+		
+		var iosocket = io.connect();
+		
+		function onNavigation(e)
+		{
+			// console.log(cacheTitle + ' > ' + document.title.replace("Flowtime.js | ", ""));
+			cacheTitle = document.title.replace("Flowtime.js | ", "");
+			//console.log('section', e.section, 'sectionIndex', e.sectionIndex);
+			//console.log('page', e.page, 'pageIndex', e.);
+			//console.log('pastSectionIndex', e.pastSectionIndex, 'pastPageIndex', e.pastPageIndex);
+			//console.log('prevSection', e.prevSection);
+			//console.log('nextSection', e.nextSection);
+			//console.log('prevPage', e.prevPage);
+			//console.log('nextPage', e.nextPage);
+			//console.log('fragment', e.fragment, + 'fragmentIndex', e.fragmentIndex);
+			//console.log("isOverview", e.isOverview);
+			//console.log('progress:', e.progress, 'total:', e.total);
+			// var value = Math.round(e.progress * 100 / e.total);
+			// console.log('Completion: ' + value + '%');
+			
+			iosocket.emit("navigate", { section: e.sectionIndex, page: e.pageIndex });
+		}
+		// starts the application with configuration options
+		Flowtime.start();
+		//
+		console.log(Flowtime.getDefaultProgress().innerHTML)
+		iosocket.emit("flowtime minimap complete", { dom: Flowtime.getDefaultProgress().innerHTML });	
+
+		Flowtime.addEventListener("flowtimenavigation", function (evt) {
+			var data = $(evt.page).data("audience");
+			if (data) {
+				iosocket.emit("audience", data);
+			}
+
+		})	
+	</script>
+</body>
+</html>

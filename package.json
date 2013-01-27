@@ -7,7 +7,9 @@
     "test": "test"
   },
   "dependencies": {
-    "should": "~1.2.1"
+    "should": "~1.2.1",
+    "node-static": "~0.6.6",
+    "socket.io": "~0.9.13"
   },
   "devDependencies": {},
   "scripts": {
