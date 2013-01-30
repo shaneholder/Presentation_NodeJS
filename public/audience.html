@@ -12,7 +12,7 @@
 			<div class="center-content">
 				<h1 class="title">		
 				</h1>
-				<div class="btn-group btn-group-vertical">
+				<div class="btn-group btn-group-vertical vote">
 					<div class="yes btn btn-primary btn-large" data-value="yes">
 						<h1>Yes</h1></div>
 					<div class="no btn btn-danger btn-large" data-value="no"><h1>No</h1></div>
@@ -25,6 +25,8 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function () {
+	$(".vote").hide();
+	
 		var socket = io.connect();
 
 		$(".yes").on("click", function(){
@@ -39,8 +41,15 @@ $(function () {
 			socket.emit("vote", {"vote": "pizza"});
 		});
 
-		socket.on("titleChange", function (data) {
-			$(".title").text(data.title);
+		socket.on("audience", function (data) {
+			if (data && data.title) {
+				$(".title").text(data.title);
+			}
+			if (data && data.vote) {
+				$(".vote").show();
+			} else {
+				$(".vote").hide();
+			}
 		});
 
 });

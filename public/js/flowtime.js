@@ -3,7 +3,7 @@
  * http://marcolago.com/flowtime-js/
  * MIT licensed
  *
- * Copyright (C) 2012 Marco Lago, http://marcolago.com
+ * Copyright (C) 2012-2013 Marco Lago, http://marcolago.com
  */
 
 var Flowtime = (function ()
@@ -30,6 +30,7 @@ var Flowtime = (function ()
 	var FRAGMENT_CLASS = "ft-fragment";
 	var FRAGMENT_SELECTOR = "." + FRAGMENT_CLASS;
 	var FRAGMENT_REVEALED_CLASS = "revealed";
+	var FRAGMENT_ACTUAL_CLASS = "actual";
 	var FRAGMENT_REVEALED_TEMP_CLASS = "revealed-temp";
 	var DEFAULT_PROGRESS_CLASS = "ft-default-progress";
 	var DEFAULT_PROGRESS_SELECTOR = "." + DEFAULT_PROGRESS_CLASS;
@@ -47,6 +48,7 @@ var Flowtime = (function ()
 	 * application variables
 	 */
 	var ftContainer = document.querySelector(".flowtime");			// cached reference to .flowtime element
+	var html = document.querySelector("html");						// cached reference to html element
 	var body = document.querySelector("body");						// cached reference to body element
 	var useHash = false;											// if true the engine uses only the hash change logic
 	var currentHash = "";											// the hash string of the current section / page pair
@@ -446,7 +448,12 @@ var Flowtime = (function ()
 			{
 				f = fr[fp][fsp] += 1;
 			}
-			Brav1Toolbox.addClass(fragmentsArray[fp][fsp][f], FRAGMENT_REVEALED_CLASS);
+			for (var i = 0; i <= f; i++)
+			{
+				Brav1Toolbox.addClass(fragmentsArray[fp][fsp][i], FRAGMENT_REVEALED_CLASS);
+				Brav1Toolbox.removeClass(fragmentsArray[fp][fsp][i], FRAGMENT_ACTUAL_CLASS);
+			}
+			Brav1Toolbox.addClass(fragmentsArray[fp][fsp][f], FRAGMENT_ACTUAL_CLASS);
 		}
 
 		/**
@@ -467,14 +474,26 @@ var Flowtime = (function ()
 			{
 				f = fr[fp][fsp];
 			}
-			Brav1Toolbox.removeClass(fragmentsArray[fp][fsp][f], FRAGMENT_REVEALED_CLASS);
-			Brav1Toolbox.removeClass(fragmentsArray[fp][fsp][f], FRAGMENT_REVEALED_TEMP_CLASS);
-			fr[fp][fsp] -= 1;
+			for (var i = 0; i < fragmentsArray[fp][fsp].length; i++)
+			{
+				if (i >= f)
+				{
+					Brav1Toolbox.removeClass(fragmentsArray[fp][fsp][i], FRAGMENT_REVEALED_CLASS);
+					Brav1Toolbox.removeClass(fragmentsArray[fp][fsp][i], FRAGMENT_REVEALED_TEMP_CLASS);
+				}
+				Brav1Toolbox.removeClass(fragmentsArray[fp][fsp][i], FRAGMENT_ACTUAL_CLASS);
+			}
+			f -= 1;
+			if (f >= 0)
+			{
+				Brav1Toolbox.addClass(fragmentsArray[fp][fsp][f], FRAGMENT_ACTUAL_CLASS);
+			}
+			fr[fp][fsp] = f;
 		}
 
 		/**
 		 * show all the fragments or the fragments in the specified page
-		 * adds a temporary class wich does not override the current status of fragments
+		 * adds a temporary class which does not override the current status of fragments
 		 */
 		function _showFragments()
 		{
@@ -486,7 +505,7 @@ var Flowtime = (function ()
 
 		/**
 		 * hide all the fragments or the fragments in the specified page
-		 * removes a temporary class wich does not override the current status of fragments
+		 * removes a temporary class which does not override the current status of fragments
 		 */
 		function _hideFragments()
 		{
@@ -545,26 +564,18 @@ var Flowtime = (function ()
 							else if (isp == sp)
 							{	
 								// same page
-								for (var f = 0; f < frsp.length; f++)
+								if (_fragmentsOnBack == true && (pastIndex.section > NavigationMatrix.getPageIndex().section || pastIndex.page > NavigationMatrix.getPageIndex().page))
 								{
-									if (_fragmentsOnBack == false)
+									for (var f = 0; f < frsp.length; f++)
 									{
-										// hide all fragments
-										_hideFragment(ip, isp, f);
+										_showFragment(ip, isp, f);
 									}
-									else
+								}
+								else
+								{
+									for (var f = frsp.length - 1; f >= 0; f--)
 									{
-										// show alla fragment only if
-										if (pastIndex.section > NavigationMatrix.getPageIndex().section || pastIndex.page > NavigationMatrix.getPageIndex().page)
-										{
-											// we are coming from a page after this
-											_showFragment(ip, isp, f);
-										}
-										else
-										{
-											// otherwise hide all fragments
-											_hideFragment(ip, isp, f);
-										}
+										_hideFragment(ip, isp, f);
 									}
 								}
 								if (_fragmentsOnBack == false)
@@ -575,7 +586,7 @@ var Flowtime = (function ()
 								{
 									if (pastIndex.section > NavigationMatrix.getPageIndex().section || pastIndex.page > NavigationMatrix.getPageIndex().page)
 									{
-										fr[ip][isp] = f - 1;	
+										fr[ip][isp] = frsp.length - 1;	
 									}
 									else
 									{
@@ -926,13 +937,23 @@ var Flowtime = (function ()
 			navigateTo(dest, true, true);
 		}
 		// pages in oveview mode
-		if (isOverview && Brav1Toolbox.hasClass(e.target, PAGE_CLASS))
+		if (isOverview)
 		{
-			navigateTo(e.target, null, true);
+			e.preventDefault();
+			var dest = e.target;
+			while (dest && !Brav1Toolbox.hasClass(dest, PAGE_CLASS))
+			{
+				dest = dest.parentNode;
+			}
+			if (Brav1Toolbox.hasClass(dest, PAGE_CLASS))
+			{
+				navigateTo(dest, null, true);
+			}
 		}
 		// thumbs in the default progress indicator
 		if (Brav1Toolbox.hasClass(e.target, PAGE_THUMB_CLASS))
 		{
+			e.preventDefault();
 			var pTo = Number(unsafeAttr(e.target.getAttribute("data-section")));
 			var spTo = Number(unsafeAttr(e.target.getAttribute("data-page")));
 			_gotoPage(pTo, spTo);
@@ -991,6 +1012,128 @@ var Flowtime = (function ()
 	}
 
 /*
+	########  #######  ##     ##  ######  ##     ## 
+	   ##    ##     ## ##     ## ##    ## ##     ## 
+	   ##    ##     ## ##     ## ##       ##     ## 
+	   ##    ##     ## ##     ## ##       ######### 
+	   ##    ##     ## ##     ## ##       ##     ## 
+	   ##    ##     ## ##     ## ##    ## ##     ## 
+	   ##     #######   #######   ######  ##     ## 
+*/
+
+	var _ftX = ftContainer.offsetX;
+	var _ftY = 0;
+	var _touchStartX = 0;
+	var _touchStartY = 0;
+	var _deltaX = 0;
+	var _deltaY = 0;
+	var _dragging = 0;
+	var _dragAxis = "x";
+	var _swipeLimit = 100;
+
+	html.addEventListener("touchstart", onTouchStart, false);
+	html.addEventListener("touchmove",  onTouchMove, false);
+	html.addEventListener("touchend",   onTouchEnd, false);
+
+	function onTouchStart(e)
+	{
+		e.preventDefault();
+		e = getTouchEvent(e);
+		_touchStartX = e.clientX;
+		_touchStartY = e.clientY;
+		_dragging = 1;
+		var initOffset = getInitOffset();
+		_ftX = initOffset.x;
+		_ftY = initOffset.y;
+	}
+
+	function onTouchMove(e)
+	{
+		e.preventDefault();
+		e = getTouchEvent(e);
+		_deltaX = e.clientX - _touchStartX;
+		_deltaY = e.clientY - _touchStartY;
+	}
+
+	function onTouchEnd(e)
+	{
+		// e.preventDefault();
+		e = getTouchEvent(e);
+		_dragging = 0;
+		_dragAxis = Math.abs(_deltaX) >= Math.abs(_deltaY) ? "x" : "y";
+		if (_dragAxis == "x" && Math.abs(_deltaX) >= _swipeLimit)
+		{
+			if (_deltaX > 0)
+			{
+				_prevSection();
+			}
+			else if (_deltaX < 0)
+			{
+				_nextSection();
+			}
+			else
+			{
+				navigateTo();
+			}
+		}
+		else
+		{
+			if (_deltaY > 0 && Math.abs(_deltaY) >= _swipeLimit)
+			{
+				_prevPage();
+			}
+			else if (_deltaY < 0)
+			{
+				_nextPage();
+			}
+			else
+			{
+				navigateTo();
+			}
+		}
+
+	}
+
+	function getTouchEvent(e)
+	{
+		if (e.touches)
+		{
+      		e = e.touches[0];
+      	}
+      	return e;
+    }
+
+    function getInitOffset()
+    {
+    	var off = ftContainer.style[Brav1Toolbox.getPrefixed("transform")];
+    	// X
+    	var indexX = off.indexOf("translateX(") + 11;
+    	var offX = off.substring(indexX, off.indexOf(")", indexX));
+    	if (offX.indexOf("%") != -1)
+    	{
+    		offX = offX.replace("%", "");
+    		offX = (parseInt(offX) / 100) * window.innerWidth;
+    	}
+    	else if (offX.indexOf("px") != -1)
+    	{
+    		offX = parseInt(offX.replace("px", ""));
+    	}
+    	// Y
+    	var indexY = off.indexOf("translateY(") + 11;
+    	var offY = off.substring(indexY, off.indexOf(")", indexY));
+    	if (offY.indexOf("%") != -1)
+    	{
+    		offY = offY.replace("%", "");
+    		offY = (parseInt(offY) / 100) * window.innerHeight;
+    	}
+    	else if (offY.indexOf("px") != -1)
+    	{
+    		offY = parseInt(offY.replace("px", ""));
+    	}
+    	return { x:offX, y:offY };
+    }
+
+/*
 	 ######   ######  ########   #######  ##       ##       
 	##    ## ##    ## ##     ## ##     ## ##       ##       
 	##       ##       ##     ## ##     ## ##       ##       
@@ -1009,12 +1152,11 @@ var Flowtime = (function ()
 
 	function onNativeScroll(e)
 	{
-		if (!isTouchDevice)
-		{
-			e.preventDefault();
-			resetScroll();	
-		}
-		else if (isTouchDevice)
+		e.preventDefault();
+		resetScroll();
+
+
+		if (isTouchDevice == "tapioca")
 		{
 			if (scrollEventEnabled == true)
 			{
@@ -1086,6 +1228,7 @@ var Flowtime = (function ()
 		}
 		
 		Brav1Toolbox.addListener(window, "resize", _enable);
+		window.addEventListener("orientationchange", _enable, false);
 		
 		return {
 			enable: _enable,
@@ -1418,10 +1561,7 @@ var Flowtime = (function ()
 
 	function resetScroll()
 	{
-		if (!isTouchDevice)
-		{
-			window.scrollTo(0,0); // fix the eventually occurred page scrolling resetting the scroll values to 0
-		}
+		window.scrollTo(0,0); // fix the eventually occurred page scrolling resetting the scroll values to 0
 	}
 
 /*
@@ -1926,14 +2066,7 @@ var Flowtime = (function ()
 
 	function _setShowProgress(v)
 	{
-		if (isTouchDevice)
-		{
-			_showProgress = false;
-		}
-		else
-		{
-			_showProgress = v;
-		}
+		_showProgress = v;
 		if (_showProgress)
 		{
 			if (defaultProgress == null)

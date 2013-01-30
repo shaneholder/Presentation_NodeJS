@@ -52,11 +52,9 @@ io.sockets.on('connection', function(socket){
 		socket.broadcast.emit('vote', data);
 	});
 
-	socket.on('audience', function(data){
-		if (data.title) {
-			console.log('changing title : ' + data.title);
-			socket.broadcast.emit('titleChange', data);
-		}
+	socket.on('audience', function(data) {
+		console.log('audience request : ' + data);
+		socket.broadcast.emit('audience', data);
 	});	
 });
  

@@ -22,7 +22,7 @@
 	<meta property="og:title" content="Javascript learn to love it?">
 	<meta property="og:type" content="website">
 
-	<title>Flowtime.js</title>
+	<title>Javascript learn to love it?</title>
 	<link rel="stylesheet" href="assets/css/reset.css">
 	<link rel="stylesheet" href="css/flowtime.css">
 	<link rel="stylesheet" href="css/themes/default.css">
@@ -37,28 +37,38 @@
 					<div class="stacked-center"><a href="javascript:Flowtime.next();"><img src="assets/img/nodejs-dark.png"></a><p class="page-title">NodeJS <a href="https://twitter.com/sholder" target="_blank">@sholder</a></p></div>
 				</div>
 			</div>
-			<div id="/section-1/page-2" class="ft-page" data-id="page-2" data-audience='{"title": "Have you heard of NodeJS?"}'>
+			<div id="/section-1/page-2" class="ft-page" data-id="page-2" data-audience='{"title": "Have you heard of NodeJS?", "vote" : true }'>
 				<h1>What is it?</h1>
 				<p>who has heard of <strong>NodeJS</strong>?</p>
 				<div id="container"></div>
 			</div>
-			<div id="/section-1/page-3" class="ft-page" data-id="page-3">
+			<div id="/section-1/page-3" class="ft-page" data-id="page-3" data-audience='{"title": "Thank you for your time." }'>
 				<h1><strong>NodeJS</strong> is...</h1>				
 				<ul >
-					<li class="ft-fragment shy revealed actual">
-						<p ><strong>Not</strong> no Javascript.
-							<img class="ft-fragment shy revealed" style="position:fixed; right:0; margin-right: 3em;" src="assets/img/sadpuppy.jpg"/>
-						</p>
-					</li>
-					<li class="ft-fragment">Server side</li>
+					<li class="ft-fragment"><strong>Not</strong> no Javascript.</li>
+					<img class="ft-fragment shy revealed" style="position:fixed; right:0; margin-right: 3em;" src="assets/img/sadpuppy.jpg"/>
+					<li class="ft-fragment"><strong>JavaScript</strong> on the server</li>
 					<li class="ft-fragment"><strong>Asynchronous</strong> by default.</li>
-					<li class="ft-fragment"> DD</li>
-					<li class="ft-fragment">Fun!!</li>
+					<li class="ft-fragment">Not <strong>threaded</strong></li>
+					<li class="ft-fragment">
+<strong>Node.js</strong> is an evented I/O framework for the V8 JavaScript engine. It is intended for writing scalable network programs such as web servers..
+<a href="http://en.wikipedia.org/wiki/Nodejs"></a>http://en.wikipedia.org/wiki/Nodejs</li>
+					<li class="ft-fragment">Fun!! <strong>well at least I think so.</strong></li>
 				</ul>				
 			</div>
 			<div id="/section-1/page-4" class="ft-page" data-id="page-4">
+				<h1>REPL</h1>
+				<p>Read-Evaluate-Print-Loop</p>
+				<p>
+					<strong>Command Line</strong>
+				</p>
+				<p>Allows you to run quick tests of javascript code.</p>
+				<p><h3>DEMO</h3></p>
+			</div>
+
+			<div id="/section-1/page-5" class="ft-page" data-id="page-5">
 				<h1>Server Side</h1>
-				<pre class="language-javascript">
+				<pre>
 					<code class="language-javascript">
 var fs = require('fs');  //Module ...hang tight.
 fs.readFile("./test.txt", function (err, data){
@@ -70,30 +80,62 @@ fs.readFile("./test.txt", function (err, data){
 });
 					</code>
 			</div>
-			<div id="section-1/page-5" class="ft-page" data-id="page-5">
+			<div id="/section-1/page-6" class="ft-page" data-id="page-6">
 				<h1>Modules, modules, modules</h1>
+				<h2>Builtin</h2>
 				<pre>
-					<code>
+					<code class="language-javascript">
 var fs = require('fs'), // File System
-
+		crypto = require('crytpo'), // Cryptography support
+		net = require('net'), // Networking
+		http = require('http'); // First Class HTTP support
 					</code>
-				</pre>				
+				</pre>
+				<div class="ft-fragment">
+					<h2>3rd Party</h2>
+					<pre>
+						<code class="language-clike">
+	c:\npm install whatdoyouneed	
+	c:\npm install express // simple web app framework
+	c:\npm install mocha // unit testing framework
+						</code>
+					</pre>
+					<p>21,783 modules as of 1/27/2013</p>
+				</div>
+			</div>
+		</div>
+		<div class="ft-section" data-id="section-2">
+			<div id="/section-2/page-1" class="ft-page" data-id="page-1">
+			</div>
+			<div id="/section-2/page-2" class="ft-page" data-id="page-2">
+				<h1>Testing</h1>
+				
 			</div>
 		</div>
 
-		<div class="ft-section" data-id="section-2">
-			<div id="/section-2/page-1" class="ft-page" data-id="page-1">
+		<div class="ft-section" data-id="section-3">
+			<div id="/section-3/page-1" class="ft-page" data-id="page-1">
+				<h1>Debugging</h1>
+				
+			</div>
+		</div>
+		<div class="ft-section" data-id="section-4">
+			<div id="/section-4/page-1" class="ft-page" data-id="page-1">
 				<h1>Thanks..</h1>
 			</div>
-			<div id="/section-2/page-2" class="ft-page" data-id="page-2">
+			<div id="/section-4/page-2" class="ft-page" data-id="page-2">
 				<h1>Resources..</h1>
 				<dl>
-					<dt>NodeJS</dt>
+					<dt><strong>NodeJS</strong> - Javascript on the server</dt>
 					<dd>http://nodejs.org/</dd>
-					<dt>Flowtime.js</dt>
+					<dt><strong>Flowtime.js</strong> - HTML5 Presentation framework</dt>
 					<dd>http://flowtime-js.marcolago.com/</dd>
-					<dt>Controldeck.js</dt>
+					<dt><strong>Controldeck.js</strong> - Remote control for several HTML5 presentation frameworks.</dt>
 					<dd>http://dfcb.github.com/controldeck.js/</dd>
+					<dt><strong>Highcharts JS</strong> - Javascript Charting</dt>
+					<dd>http://highcharts.com/</dd>
+					<dt>CodeMash 2012 Gary Bernhardt</dt>
+					<dd>https://www.destroyallsoftware.com/talks/wat</dd>
 				</dl>
 			</div>
 		</div>
@@ -155,9 +197,7 @@ var fs = require('fs'), // File System
 
 		Flowtime.addEventListener("flowtimenavigation", function (evt) {
 			var data = $(evt.page).data("audience");
-			if (data) {
 				iosocket.emit("audience", data);
-			}
 
 		})	
 	</script>
