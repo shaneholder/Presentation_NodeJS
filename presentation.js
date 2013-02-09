@@ -20,7 +20,6 @@ var server = http.createServer(function (req, res) {
     console.log('Listening at: http://localhost:3000');
 });
 
-
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function(socket){
 
@@ -56,5 +55,9 @@ io.sockets.on('connection', function(socket){
 		console.log('audience request : ' + data);
 		socket.broadcast.emit('audience', data);
 	});	
+
+	fs.watch("./public", function (file) {
+		socket.broadcast.emit('pageUpdated');
+	});
 });
  
