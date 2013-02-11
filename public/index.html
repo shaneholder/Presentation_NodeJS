@@ -34,7 +34,12 @@
 		<div class="ft-section" data-id="section-1">
 			<div class="ft-page" data-id="page-1" data-title="">
 				<div class="stack-center">
-					<div class="stacked-center"><a href="javascript:Flowtime.next();"><img src="assets/img/nodejs-dark.png"></a><p class="page-title">NodeJS <a href="https://twitter.com/sholder" target="_blank">@sholder</a></p></div>
+					<div class="stacked-center"><a href="javascript:Flowtime.next();"><img src="assets/img/nodejs-dark.png"></a>
+						<p class="page-title">NodeJS <a href="https://twitter.com/sholder" target="_blank">@sholder</a></p>
+						<p>Audience participation</p>
+						http://<span class="ipAddress"></span>:
+						<span class="port"></span>/a
+					</div>
 				</div>
 			</div>
 			<div class="ft-page" data-id="page-2" data-audience='{"title": "Have you heard of NodeJS?", "vote" : true }'>
@@ -88,7 +93,7 @@ fs.readFile("./test.txt", function (err, data){
 });
 					</code>
 			</div>
-			<div class="ft-page" data-id="page-6">
+			<div class="ft-page" data-id="page-7">
 				<h1>Modules, modules, modules</h1>
 				<h2>Builtin</h2>
 				<pre>
@@ -99,6 +104,7 @@ var fs = require('fs'), // File System
 		http = require('http'); // First Class HTTP support
 					</code>
 				</pre>
+				<p>Roughly 25 builtin modules.</p>
 				<div class="ft-fragment">
 					<h2>3rd Party</h2>
 					<pre>
@@ -108,13 +114,13 @@ var fs = require('fs'), // File System
 	c:\npm install mocha // unit testing framework
 						</code>
 					</pre>
-					<p>21,783 modules as of 1/27/2013</p>
+					<p>22,660 modules as of 2/10/2013</p>
 				</div>
 			</div>
 		</div>
 		<div class="ft-section" data-id="section-2">
 			<div class="ft-page" data-id="page-1">
-				<h1>Testing</h1>
+				<h1>Testing and Debugging</h1>
 				<h2>Mocha + Should</h2>
 				<pre><code class="language-javascript">
 describe('something', function () {
@@ -126,7 +132,8 @@ describe('something', function () {
 });
 				</code></pre>
 			</div>
-			<div class="ft-page" data-id="page-1">
+			<div class="ft-page" data-id="page-2">
+				<h1>Testing and Debugging</h1>
 				<h2>Async Tests</h2>
 				<pre><code class="language-javascript">
 describe('something', function () {
@@ -140,11 +147,8 @@ describe('something', function () {
 				</code></pre>	
 				<h3>DEMO</h3>					
 			</div>
-		</div>
-
-		<div class="ft-section" data-id="section-3">
-			<div class="ft-page" data-id="page-1">
-				<h1>Debugging</h1>
+			<div class="ft-page" data-id="page-3">
+				<h1>Testing and Debugging</h1>
 				<h2>Node-Inspector<h2>
 					<pre><code class="language-clike">
 c:\npm install node-inspector -g
@@ -188,6 +192,7 @@ c:\node-inspector --web-port=1234
 	<script src="js/highcharts.js"></script>
 	<script src="js/votechart.js"></script>
 	<script src="js/autoupdate.js"></script>
+	<script src="js/getConnectData.js"></script>
 	<script src="assets/js/prism.js"></script>
 	
 	<!-- controldeck.js -->
