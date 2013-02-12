@@ -12,6 +12,7 @@
 			<div class="center-content">
 				<h1 class="title">		
 				</h1>
+				<img></img>
 				<div class="btn-group btn-group-vertical vote">
 					<div class="yes btn btn-primary btn-large" data-value="yes">
 						<h1>Yes</h1></div>
@@ -42,10 +43,18 @@ $(function () {
 		});
 
 		socket.on("audience", function (data) {
-			if (data && data.title) {
+			data = data || {};
+
+			if (data.title) {
 				$(".title").text(data.title);
 			}
-			if (data && data.vote) {
+			if (data.img) {
+				$("img").attr('src', data.img);
+				$("img").show();
+			} else {
+				$("img").hide();
+			}
+			if (data.vote) {
 				$(".vote").show();
 			} else {
 				$(".vote").hide();

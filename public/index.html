@@ -43,26 +43,26 @@
 				</div>
 			</div>
 			<div class="ft-page" data-id="page-2" data-audience='{"title": "Have you heard of NodeJS?", "vote" : true }'>
-				<h1>What is it?</h1>
 				<p>who has heard of <strong>NodeJS</strong>?</p>
+				<p class="ft-fragment shy revealed"><strong>Hint</strong>, look at your phone/tablet/laptop...</p>
 				<div id="container"></div>
 			</div>
-			<div class="ft-page" data-id="page-3" data-audience='{"title": "Thank you for your time." }'>
+			<div class="ft-page" data-id="page-3" data-audience='{"title": "Thank you for your participation." }'>
 				<h1><strong>NodeJS</strong> is...</h1>				
 				<ul >
-					<li class="ft-fragment"><strong>Not</strong> no Javascript.</li>
-					<img class="ft-fragment shy revealed" style="position:fixed; right:0; margin-right: 3em;" src="assets/img/sadpuppy.jpg"/>
-					<li class="ft-fragment"><strong>JavaScript</strong> on the server</li>
-					<li class="ft-fragment"><strong>Asynchronous</strong> by default.</li>
-					<li class="ft-fragment">Not <strong>threaded</strong></li>
-					<li class="ft-fragment">
+					<li class="ft-fragment" data-audience='{"title": "One" }'><strong>Not</strong> no Javascript.</li>
+					<img class="ft-fragment shy revealed" data-audience='{"title": "One" }' style="position:fixed; right:0; margin-right: 3em;" src="assets/img/sadpuppy.jpg"/>
+					<li class="ft-fragment" data-audience='{"title": "Two" }'><strong>JavaScript</strong> on the server</li>
+					<li class="ft-fragment" data-audience='{"title": "Buckle my shoe." }'><strong>Asynchronous</strong> by default.</li>
+					<li class="ft-fragment" data-audience='{"title": "Three" }'>Not <strong>threaded</strong></li>
+					<li class="ft-fragment" data-audience='{"title": "Four" }'>
 <strong>Node.js</strong> is an evented I/O framework for the V8 JavaScript engine. It is intended for writing scalable network programs such as web servers..
 <a href="http://en.wikipedia.org/wiki/Nodejs"></a>http://en.wikipedia.org/wiki/Nodejs</li>
-					<li class="ft-fragment">Fun!! <strong>well at least I think so.</strong></li>
+					<li class="ft-fragment" data-audience='{"title": "Stop looking at me!" }'>Fun!! <strong>well at least I think so.</strong></li>
 				</ul>				
 			</div>
-			<div class="ft-page" data=id="page-4">
-				<h1>Installing Node</h1>				
+			<div class="ft-page" data=id="page-4" data-audience='{"title": "Wait for it....." }'>
+				<h1>introduction <strong>get it</strong></h1>
 				<p>Download from <strong>http://nodejs.org/</strong></p>
 				<p><strong>or</strong></p>
 				<h1>Chocolatey</h1>
@@ -70,14 +70,14 @@
 c:\cinst node
 				</code></pre>
 			</div>
-			<div class="ft-page" data-id="page-5">
-				<h1>REPL</h1>
+			<div class="ft-page" data-id="page-5" data-audience='{"title": "keep watching....." }'>
+				<h1>introduction <strong>REPL</strong></h1>
 				<p>Read-Evaluate-Print-Loop - <strong>Command Line</strong></p>					
 				<p>Allows you to run quick tests of javascript code.</p>
 				<h3>DEMO</h3>
 			</div>
-			<div class="ft-page" data-id="page-6">
-				<h1>Server Side</h1>
+			<div class="ft-page" data-id="page-6" data-audience='{"title": "Psych!! nothing to see here" }'>
+				<h1>introduction <strong>Server Side</strong></h1>
 				<pre>
 					<code class="language-javascript">
 var fs = require('fs');  //Module ...hang tight.
@@ -90,9 +90,9 @@ fs.readFile("./test.txt", function (err, data){
 });
 					</code>
 			</div>
-			<div class="ft-page" data-id="page-7">
-				<h1>Modules, modules, modules</h1>
-				<h2>Builtin</h2>
+			<div class="ft-page" data-id="page-7" data-audience='{"title": "Would you quit looking at me and pay attention!!" }'>
+				<h1>introduction <strong>Modules</strong></h1>
+				<h3>Builtin</h3>
 				<pre>
 					<code class="language-javascript">
 var fs = require('fs'), // File System
@@ -102,7 +102,7 @@ var fs = require('fs'), // File System
 					</code>
 				</pre>
 				<p>Roughly 25 builtin modules.</p>
-				<div class="ft-fragment">
+				<div class="ft-fragment" data-audience='{"title": "Ok, I warned you" }'>
 					<h2>3rd Party</h2>
 					<pre>
 						<code class="language-clike">
@@ -114,8 +114,20 @@ var fs = require('fs'), // File System
 					<p>22,660 modules as of 2/10/2013</p>
 				</div>
 			</div>
+			<div class="ft-page" data=id="page-8" data-audience='{"title": "Boo", "img": "/img/scary.jpg" }'>
+				<h1>introduction</h1>
+				<h2>Event Loop</h2>
+				<p>Node is single threaded but Evented for I/O.</p>
+			</div>
 		</div>
 		<div class="ft-section" data-id="section-2">
+			<div class="ft-page" data-id="page-1">
+				<h1>development</h1>
+
+			</div>
+		</div>
+
+		<div class="ft-section" data-id="section-3">
 			<div class="ft-page" data-id="page-1">
 				<h1>Testing and Debugging</h1>
 				<h2>Mocha + Should</h2>
@@ -260,8 +272,11 @@ c:\node-inspector --web-port=1234
 		iosocket.emit("flowtime minimap complete", { dom: Flowtime.getDefaultProgress().innerHTML });	
 
 		Flowtime.addEventListener("flowtimenavigation", function (evt) {
-			var data = $(evt.page).data("audience");
-				iosocket.emit("audience", data);
+			var data = $(evt.fragment).data("audience");
+			if (!data)
+				data = $(evt.page).data("audience");
+
+			iosocket.emit("audience", data);
 
 		})
 	</script>
