@@ -1,16 +1,4 @@
-var os = require('os');
+var myModule = require('./module.js');
 
-function reportMemory() {
-	console.log(process.memoryUsage());
-	console.log(os.totalmem());
-	console.log(os.freemem());
-}
+myModule.writeStuff();
 
-var gobble = '0123456789';
-
-setInterval(function() {
-	reportMemory();
-	gobble = gobble + gobble;
-}, 500);
-
-console.log(os.cpus());
