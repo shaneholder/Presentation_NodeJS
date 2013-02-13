@@ -89,20 +89,25 @@ fs.readFile("./test.txt", function (err, data){
 	console.log(data);
 });
 					</code>
+				</pre>
+				<h3>DEMO</h3>
 			</div>
 			<div class="ft-page" data-id="page-7" data-audience='{"title": "Would you quit looking at me and pay attention!!" }'>
 				<h1>introduction <strong>Modules</strong></h1>
-				<h3>Builtin</h3>
-				<pre>
-					<code class="language-javascript">
-var fs = require('fs'), // File System
-		crypto = require('crytpo'), // Cryptography support
-		net = require('net'), // Networking
-		http = require('http'); // First Class HTTP support
-					</code>
-				</pre>
-				<p>Roughly 25 builtin modules.</p>
-				<div class="ft-fragment" data-audience='{"title": "Ok, I warned you" }'>
+					<h3>Builtin</h3>
+					<pre>
+						<code class="language-javascript">
+	var fs = require('fs'), // File System
+			crypto = require('crytpo'), // Cryptography support
+			net = require('net'), // Networking
+			http = require('http'); // First Class HTTP support
+						</code>
+					</pre>
+					<p>Roughly 25 builtin modules.</p>
+			</div>
+			<div class="ft-page" data-id="page-8" data-audience='{"title": "Ok, I warned you" }'>
+				<h1>introduction <strong>Modules</strong></h1>
+				<div>
 					<h2>3rd Party</h2>
 					<pre>
 						<code class="language-clike">
@@ -112,18 +117,64 @@ var fs = require('fs'), // File System
 						</code>
 					</pre>
 					<p>22,660 modules as of 2/10/2013</p>
+					<h3>DEMO</h3>
 				</div>
 			</div>
-			<div class="ft-page" data=id="page-8" data-audience='{"title": "Boo", "img": "/img/scary.jpg" }'>
-				<h1>introduction</h1>
-				<h2>Event Loop</h2>
+			<div class="ft-page" data=id="page-9" data-audience='{"title": "Boo", "img": "/img/scary.jpg" }'>
+				<h1>introduction <strong>Event Loop</strong></h1>
 				<p>Node is single threaded but Evented for I/O.</p>
+				<h3>DEMO</h3>
 			</div>
 		</div>
 		<div class="ft-section" data-id="section-2">
 			<div class="ft-page" data-id="page-1">
-				<h1>development</h1>
+				<h1>development <strong>Tools</strong></h1>
+				<p>well....all you really need is an editor.</p>
+				<p class="ft-fragment step revealed">notepad...no way.</p>
+				<p class="ft-fragment step revealed">Visual Studio...possibly</p>
+				<p class="ft-fragment step revealed">Emacs!!...now we're talking</p>
+				<p class="ft-fragment step revealed"><strong>Sublime Text 2</strong>...current favorite</p>
+			</div>
+			<div class="ft-page" data-id="page-2">
+				<h1>development <strong>grock a service.</strong></h1>
+				<pre><code class='language-clike'>
+c:\npm install request					
+				</code></pre>
+				<pre><code class='language-javascript'>
+var request = require('request');
+	request.get('url', function (err, req, body) {
+		// check for err and req.status is as expected
+		// Do something with body
+	});
+				</code></pre>
 
+				<h3>DEMO</h3>
+			</div>
+			<div class="ft-page" data-id="page-3">
+				<h1>development <strong>create a server</strong></h1>
+				<div class="ft-fragment">
+					<h1><strong>web server that is</strong></h1>
+					<pre><code class='language-javascript'>
+	var http = require('http');
+		http.createServer(function(req, res) {
+			// do stuff with the request
+			// do stuff with response
+			/// DONT FORGET TO CALL res.end();
+			})
+			.listen(port);
+					</code></pre>					
+					<h3>DEMO</h3>
+				</div>
+			</div>
+			<div class="ft-page" data-id="page-4">
+				<h1>development <strong>create a server</strong></h1>
+				<div class="ft-fragment">
+					<h1><strong>seriously</strong></h1>
+					<pre><code class='language-clike'>
+c:\npm install express						
+					</code></pre>					
+					<h3>DEMO</h3>
+				</div>
 			</div>
 		</div>
 
@@ -169,16 +220,11 @@ c:\node-inspector --web-port=1234
 		<div class="ft-section" data-id="section-4">
 			<div class="ft-page" data-id="page-1">
 				<h1>Deployment</h1>
-				<h2>Supervisor</h2>
-				<pre><code class="language-clike">c:\npm install supervisor -g</code></pre>
-			</div>
-			<div class="ft-page" data-id="page-2">
-				<h1>Deployment</h1>
 				<h2>IIS<h2>
 				<p>Web Platform Installer</p>
 				<p>http://www.microsoft.com/web/downloads/platform.aspx</p>
 			</div>
-			<div class="ft-page" data-id="page-3">
+			<div class="ft-page" data-id="page-2">
 				<h1>Deployment</h1>
 				<h2>Hosting Providers<h2>
 				<ul>
@@ -187,10 +233,12 @@ c:\node-inspector --web-port=1234
 					<li class="ft-fragment">Windows Azure</li>
 				</ul>
 			</div>
-			<div class="ft-page" data-id="page-4">
+			<div class="ft-page" data-id="page-3">
 				<h1>Deployment</h1>
 				<h2>Logging - Winston</h2>
 				<pre><code class="language-clike">c:\npm install winston</code></pre>
+				<h2>Supervisor</h2>
+				<pre><code class="language-clike">c:\npm install supervisor -g</code></pre>
 			</div>
 		</div>
 		<div class="ft-section" data-id="section-5">
