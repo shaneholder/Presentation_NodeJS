@@ -420,3 +420,11 @@ body {
 	bottom: -32%;
 	z-index: 30;
 }
+
+code {
+	font-size: 1.5em;
+}
+
+span.token.comment {
+	color: rgb(102, 153, 116) !important;
+}
