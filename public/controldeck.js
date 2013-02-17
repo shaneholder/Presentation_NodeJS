@@ -1,5 +1,5 @@
 $(function(){
-    var iosocket = io.connect();
+    var iosocket = io.connect('/c');
 
     iosocket.on('connect', function () {
         // console.log('connected');

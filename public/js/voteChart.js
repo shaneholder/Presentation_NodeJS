@@ -10,7 +10,7 @@ $(function () {
                 plotShadow: false,
                 events: {
                     load: function() {                        
-                        var socket = io.connect();
+                        var socket = io.connect('/a');
                             series = this.series[0],
                             voteYes = {
                                 "y": 0,

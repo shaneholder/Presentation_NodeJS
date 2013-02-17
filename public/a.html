@@ -28,7 +28,7 @@
 $(function () {
 	$(".vote").hide();
 	
-		var socket = io.connect();
+		var socket = io.connect('/a');
 
 		$(".yes").on("click", function(){
 			socket.emit("vote", {"vote": "yes"});

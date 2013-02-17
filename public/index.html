@@ -300,6 +300,7 @@ c:\node-inspector --web-port=1234
 		Flowtime.addEventListener("flowtimenavigation", onNavigation, false);
 		
 		var iosocket = io.connect();
+		var audience = io.connect('/a');
 		
 		function onNavigation(e)
 		{
@@ -331,7 +332,7 @@ c:\node-inspector --web-port=1234
 			if (!data)
 				data = $(evt.page).data("audience");
 
-			iosocket.emit("audience", data);
+			audience.emit("audience", data);
 
 		})
 	</script>

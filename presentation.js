@@ -14,6 +14,7 @@ var server = http.createServer(function (req, res) {
 	var pathname = url.parse(req.url).pathname;
 	console.log('pathname: '+pathname);
 
+
 	req.addListener('end', function () {
 		fileServer.serve(req, res);
 	});
@@ -38,7 +39,13 @@ function getExternalIPAddress () {
 }
 
 var io = require('socket.io').listen(server);
-io.sockets.on('connection', function(socket) {
+io.of('/').on('connection', function (socket) {
+	socket.on('navigate', function (){
+		console.log('navigate event received');
+	});
+
+});
+io.of('/c').on('connection', function(socket) {
 	var connectData = {};
 	connectData.ipAddress = getExternalIPAddress();
 	connectData.port = port;
@@ -46,6 +53,7 @@ io.sockets.on('connection', function(socket) {
 	socket.emit('connectData', connectData);
 
 	socket.on('message', function(message){
+		console.log(util.inspect(socket, true, 1, true));
 		socket.broadcast.emit('message', message);
 	});
 
@@ -62,6 +70,7 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('navigate', function(data){
+		console.log(util.inspect(socket, true, 2, true));
 		socket.broadcast.emit('navigate', data);
 	});
 
@@ -69,20 +78,26 @@ io.sockets.on('connection', function(socket) {
 		console.log("Connection " + socket.id + " terminated.");
 	});
 
-	socket.on('vote', function (data) {
-		socket.broadcast.emit('vote', data);
-	});
-
-	socket.on('audience', function(data) {
-		console.log('audience request : ' + data);
-		socket.broadcast.emit('audience', data);
-	});	
-
 	fs.watch("./public", function (file) {
 		console.log("File Updated:");
 		console.dir(file);
 		socket.broadcast.emit('pageUpdated');
 	});
+});
+
+io.of('/a').on('connection', function (socket) {
+	console.log('Audience connected');
+
+	socket.on('vote', function (data) {
+		console.log('got vote');
+		socket.broadcast.emit('vote', data);
+	});
+
+	socket.on('audience', function(data) {
+		console.log('audience request : ' + util.inspect(data, false, 1, true));
+		console.log(util.inspect(socket, true, 1, true));
+		socket.broadcast.emit('audience', data);
+	});	
 });
 
 console.log(getExternalIPAddress()); 

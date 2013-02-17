@@ -24,9 +24,9 @@ function messageHandler(message, a, b, c, d) {
     else if (message === 'navigate')  			Flowtime.gotoPage(a,b);
 }
 
-var iosocket = io.connect();
+var iosocket = io.connect('/c');
 
-iosocket.on('connect', function () {
+iosocket.of('/c').on('connect', function () {
     console.log('connected');
 });
 
