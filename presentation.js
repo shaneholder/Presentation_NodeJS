@@ -39,18 +39,16 @@ function getExternalIPAddress () {
 }
 
 var io = require('socket.io').listen(server);
-io.of('/').on('connection', function (socket) {
-	socket.on('navigate', function (){
-		console.log('navigate event received');
-	});
-
-});
-io.of('/c').on('connection', function(socket) {
+io.on('connection', function (socket) {
 	var connectData = {};
 	connectData.ipAddress = getExternalIPAddress();
 	connectData.port = port;
 
-	socket.emit('connectData', connectData);
+	socket.emit('connectData', connectData);	
+
+});
+
+io.of('/c').on('connection', function(socket) {
 
 	socket.on('message', function(message){
 		console.log(util.inspect(socket, true, 1, true));
